@@ -1,75 +1,41 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Ionicons } from "@expo/vector-icons";
+import { Text, TouchableOpacity, View } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View className="flex-1 bg-white dark:bg-neutral-900">
+      {/* 대형 헤더 */}
+      <View className="pt-16 pb-6 px-6 bg-primary rounded-b-3xl shadow-lg">
+        <Text className="text-2xl font-bold text-white">안녕하세요 👋</Text>
+        <Text className="text-base text-white/80 mt-1">
+          오늘 어떤 일정을 준비할까요?
+        </Text>
+      </View>
+      {/* 오늘의 일정 요약 */}
+      <View className="mx-6 mt-8 p-5 bg-secondary rounded-2xl shadow flex-row items-center justify-between">
+        <View>
+          <Text className="text-lg font-semibold text-neutral-900 dark:text-white">
+            오늘의 일정
+          </Text>
+          <Text className="text-sm text-neutral-500 dark:text-neutral-300 mt-1">
+            등록된 일정이 없습니다.
+          </Text>
+        </View>
+        <Ionicons name="calendar-outline" size={32} color="#4F8EF7" />
+      </View>
+      {/* 플로팅 일정 추가 버튼 */}
+      <TouchableOpacity
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-primary rounded-full px-8 py-4 flex-row items-center shadow-lg"
+        onPress={() => {
+          /* TODO: 일정 추가 폼 이동 */
+        }}
+        activeOpacity={0.85}
+      >
+        <Ionicons name="add-circle" size={28} color="#fff" />
+        <Text className="text-white text-lg font-semibold ml-2">
+          일정 추가하기
+        </Text>
+      </TouchableOpacity>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});

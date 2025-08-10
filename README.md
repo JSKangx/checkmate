@@ -1,50 +1,93 @@
-# Welcome to your Expo app 👋
+# 준비물 챙기기 네이티브 앱 서비스 개요
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 서비스 목적
 
-## Get started
+- 사용자가 일정에 따라 필요한 준비물을 빠짐없이 챙길 수 있도록 지원하는 네이티브 앱
+- AI 기반 추천, 알림, 동행자와의 공유 등 편의 기능 제공
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 주요 기능
 
-2. Start the app
+1. **일정 관리**
+   - 일정 생성, 수정, 삭제
+   - 일정 타입(예: 여행, 캠핑, 출장 등) 지정
+2. **준비물 리스트 관리**
+   - 일정별 준비물 리스트 생성 및 편집
+   - 준비물 체크/완료 표시
+3. **AI 추천 시스템**
+   - 사용자의 과거 준비물 기록 및 패턴을 분석하여 비슷한 일정에 맞는 준비물 추천
+   - 추천 결과를 앱에서 바로 반영 가능
+4. **알림 기능**
+   - 준비물 챙기기 알림 시간 설정
+   - 푸시 알림으로 준비물 챙기기 타이밍 안내
+5. **동행자와의 공유**
+   - 일정별 준비물 리스트를 동행자와 공유 및 실시간 편집
+   - 초대 링크/코드로 동행자 추가
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 전체 데이터 흐름
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1. 사용자가 앱에서 일정을 생성/수정
+2. AI 추천 시스템에 준비물 추천 요청
+3. 추천 결과를 앱에 표시, 사용자가 리스트 확정
+4. 준비물 리스트 및 알림 시간 저장
+5. 동행자와 준비물 리스트 실시간 공유 및 동기화
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 기술 스택 및 인프라 구성
 
-When you're ready, run:
+### 프론트엔드(모바일 앱)
 
-```bash
-npm run reset-project
-```
+- **React Native**
+  - iOS/Android 동시 개발, 네이티브 성능 확보
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 백엔드
 
-## Learn more
+- **Python (FastAPI)**
+  - REST API 서버, AI 추천 시스템 연동
+- **PostgreSQL**
+  - 관계형 데이터베이스, 일정/준비물/사용자/공유 등 데이터 관리
 
-To learn more about developing your project with Expo, look at the following resources:
+### AI 추천 시스템
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- **Python (scikit-learn, PyTorch 등)**
+  - FastAPI/Flask로 REST API 제공
+  - 사용자 패턴 기반 추천 알고리즘 구현
 
-## Join the community
+### 알림 시스템
 
-Join our community of developers creating universal apps.
+- **Firebase Cloud Messaging (FCM)**
+  - 무료 푸시 알림 서비스, iOS/Android 지원
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 실시간 동기화/공유
+
+- **Firebase Realtime Database** 또는 **WebSocket**
+  - 동행자와 준비물 리스트 실시간 동기화
+
+### DevOps & CI/CD
+
+- **GitHub Actions**
+  - 코드 빌드, 테스트, 배포 자동화
+- **Docker**
+  - 백엔드/AI 서버 컨테이너화 및 배포
+- **AWS/GCP/Azure**
+  - 서버, DB, 스토리지 등 인프라 운영(가장 많이 쓰이는 클라우드)
+
+---
+
+## 기대 효과
+
+- 준비물 누락 방지 및 일정 준비 효율성 향상
+- AI 추천으로 반복 일정 시 준비물 관리 시간 단축
+- 동행자와의 협업 및 소통 강화
+
+---
+
+## 추가 개발/확장 방향
+
+- 챗봇 기반 준비물 추천
+- OCR/음성 인식으로 준비물 입력
+- 캘린더 연동, 위치 기반 알림 등
